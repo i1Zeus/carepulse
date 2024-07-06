@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* TAILWIND STYLES */
+/* == TAILWIND STYLES */
 @layer base {
   /* Remove scrollbar */
   .remove-scrollbar::-webkit-scrollbar {
@@ -27,7 +27,7 @@
 }
 
 @layer utilities {
-  /* ===== UTILITIES */
+  /*  UTILITIES */
   .sidebar {
     @apply remove-scrollbar w-full max-w-72 flex-col overflow-auto bg-black-800 px-7 py-10;
   }
@@ -81,7 +81,7 @@
     @apply flex w-full flex-col items-center gap-8 border-y-2 border-dark-400 py-8 md:w-fit md:flex-row;
   }
 
-  /* ===== ADMIN */
+  /*  ADMIN */
   .admin-header {
     @apply sticky top-3 z-20 mx-3 flex items-center justify-between rounded-2xl bg-dark-200 px-[5%] py-5 shadow-lg xl:px-12;
   }
@@ -131,7 +131,7 @@
     @apply flex w-full items-center justify-between space-x-2 p-4;
   }
 
-  /* ===== ALIGNMENTS */
+  /*  ALIGNMENTS */
   .flex-center {
     @apply flex items-center justify-center;
   }
@@ -140,7 +140,7 @@
     @apply flex items-center justify-between;
   }
 
-  /* ===== TYPOGRAPHY */
+  /*  TYPOGRAPHY */
   .text-36-bold {
     @apply text-[36px] leading-[40px] font-bold;
   }
@@ -181,7 +181,7 @@
     @apply text-[12px] leading-[16px] font-semibold;
   }
 
-  /* =====  SHADCN OVERRIDES */
+  /*   SHADCN OVERRIDES */
   .shad-primary-btn {
     @apply bg-green-500 text-white !important;
   }
@@ -266,18 +266,18 @@
     @apply top-2 focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
 
-  /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+  /* REACT PHONE NUMBER INPUT OVERRIDES */
   .input-phone {
     @apply mt-2 h-11 rounded-md px-3 text-sm border bg-dark-400 placeholder:text-dark-600 border-dark-500 !important;
   }
 
-  /* =====  REACT DATE PICKER OVERRIDES */
+  /* REACT DATE PICKER OVERRIDES */
   .date-picker {
     @apply overflow-hidden border-transparent w-full placeholder:text-dark-600  h-11 text-14-medium rounded-md px-3 outline-none !important;
   }
 }
 
-/* =====  REACT-DATEPICKER OVERRIDES */
+/* REACT-DATEPICKER OVERRIDES */
 .react-datepicker-wrapper.date-picker {
   display: flex;
   align-items: center;
@@ -336,7 +336,7 @@
   align-items: center !important;
 }
 
-/* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+/* REACT PHONE NUMBER INPUT OVERRIDES */
 .PhoneInputInput {
   outline: none;
   margin-left: 4px;
