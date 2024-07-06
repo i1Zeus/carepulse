@@ -5,6 +5,7 @@ import Image from "next/image";
 import ReactDatePicker from "react-datepicker";
 import { Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 import { Checkbox } from "./ui/checkbox";
 import {
