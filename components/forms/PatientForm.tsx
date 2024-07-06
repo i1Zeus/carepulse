@@ -14,7 +14,7 @@ const formSchema = z.object({
   }),
 });
 
-const PatientForm = () => {
+export const PatientForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -69,5 +69,3 @@ const PatientForm = () => {
     </Form>
   );
 };
-
-export default PatientForm;
