@@ -39,7 +39,7 @@ const PatientForm = () => {
           control={form.control}
           name="name"
           label="Full name"
-          placeholder="John Doe"
+          placeholder="Hussein Najah"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
@@ -49,7 +49,7 @@ const PatientForm = () => {
           control={form.control}
           name="email"
           label="Email"
-          placeholder="johndoe@gmail.com"
+          placeholder="husseinnajah@gmail.com"
           iconSrc="/assets/icons/email.svg"
           iconAlt="email"
         />
@@ -59,7 +59,7 @@ const PatientForm = () => {
           control={form.control}
           name="phone"
           label="Phone number"
-          placeholder="(555) 123-4567"
+          placeholder="0773 123 4567"
         />
 
         <Button type="submit" className="w-full">
