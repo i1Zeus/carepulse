@@ -1,6 +1,5 @@
-"use client";
-
 import Image from "next/image";
+
 import { Button } from "./ui/button";
 
 interface ButtonProps {
@@ -23,6 +22,7 @@ const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
             alt="loader"
             height={24}
             width={24}
+            className="animate-spin"
           />
           Loading...
         </div>
