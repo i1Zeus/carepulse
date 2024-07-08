@@ -5,50 +5,73 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Form, FormControl } from "@/components/ui/form";
-import { createUser } from "@/lib/actions/patient.actions";
-import { UserFormValidation } from "@/lib/validation";
+import {
+  Doctors,
+  GenderOptions,
+  IdentificationTypes,
+  PatientFormDefaultValues,
+} from "@/constants";
+import { registerPatient } from "@/lib/actions/patient.actions";
+import { PatientFormValidation } from "@/lib/validation";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
+import { FileUploader } from "../FileUploader";
 import SubmitButton from "../SubmitButton";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { SelectItem } from "../ui/select";
-import Image from "next/image";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
+  const usedName = user.name.split(" ", 1)[0];
+
+  const form = useForm<z.infer<typeof PatientFormValidation>>({
+    resolver: zodResolver(PatientFormValidation),
     defaultValues: {
+      ...PatientFormDefaultValues,
       name: "",
       email: "",
       phone: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
+  const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
 
+    let formData;
+
+    if (
+      values.identificationDocument &&
+      values.identificationDocument.length > 0
+    ) {
+      const blobFile = new Blob([values.identificationDocument[0]], {
+        type: values.identificationDocument[0].type,
+      });
+
+      formData = new FormData();
+      formData.append("blobFile", blobFile);
+      formData.append("fileName", values.identificationDocument[0].name);
+    }
+
     try {
-      const user = {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
+      const patientData = {
+        ...values,
+        userId: user.$id,
+        birthDate: new Date(values.birthDate),
+        identificationDocument: formData,
       };
 
-      const newUser = await createUser(user);
+      // @ts-ignore
+      const patient = await registerPatient(patientData);
 
-      if (newUser) {
-        router.push(`/patients/${newUser.$id}/register`);
-      }
+      if (patient) router.push(`/patients/${user.$id}/new-appointment`);
     } catch (error) {
       console.log(error);
     }
-
     setIsLoading(false);
   };
 
@@ -59,7 +82,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         className="flex-1 space-y-12"
       >
         <section className="mb-12 space-y-4">
-          <h1 className="header">Welcome 👋🏼</h1>
+          <h1 className="header">Welcome {usedName} 👋🏼</h1>
           <p className="text-dark-700">Let us know more about yourself.</p>
         </section>
 
@@ -73,7 +96,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="name"
-            placeholder="Hussein Najah"
+            placeholder={user.name}
             label="Full Name"
             iconSrc="/assets/icons/user.svg"
             iconAlt="user"
@@ -85,7 +108,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="email"
               label="Email"
-              placeholder="husseinnajah@gmail.com"
+              placeholder={user.email}
               iconSrc="/assets/icons/email.svg"
               iconAlt="email"
             />
@@ -95,7 +118,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               control={form.control}
               name="phone"
               label="Phone number"
-              placeholder="0773 123 4567"
+              placeholder={user.phone}
             />
           </div>
           {/* BirthDate & Gender */}
@@ -293,7 +316,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             label="Scanned Copy of Identification Document"
             renderSkeleton={(field) => (
               <FormControl>
-                {/* <FileUploader files={field.value} onChange={field.onChange} /> */}
+                <FileUploader files={field.value} onChange={field.onChange} />
               </FormControl>
             )}
           />
@@ -329,7 +352,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           />
         </section>
 
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
       </form>
     </Form>
   );
