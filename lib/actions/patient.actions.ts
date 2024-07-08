@@ -31,3 +31,5 @@ export const getUser = async (userId: string) => {
     console.log(err);
   }
 };
+
+export const getPatient = async (userId: string) => {};
