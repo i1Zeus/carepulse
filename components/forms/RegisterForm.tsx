@@ -33,9 +33,9 @@ const RegisterForm = ({ user }: { user: User }) => {
     resolver: zodResolver(PatientFormValidation),
     defaultValues: {
       ...PatientFormDefaultValues,
-      name: "",
-      email: "",
-      phone: "",
+      name: user.name ? user.name : "",
+      email: user.email ? user.email : "",
+      phone: user.phone ? user.phone : "",
     },
   });
 
@@ -145,7 +145,10 @@ const RegisterForm = ({ user }: { user: User }) => {
                     {GenderOptions.map((option, i) => (
                       <div key={option + i} className="radio-group">
                         <RadioGroupItem value={option} id={option} />
-                        <Label htmlFor={option} className="cursor-pointer">
+                        <Label
+                          htmlFor={option}
+                          className="cursor-pointer capitalize"
+                        >
                           {option}
                         </Label>
                       </div>
