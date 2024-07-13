@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// import { StatCard } from "@/components/StatCard";
-// import { columns } from "@/components/table/columns";
-// import { DataTable } from "@/components/table/DataTable";
+import { StatCard } from "@/components/StatCard";
+import { columns } from "@/components/table/columns";
+import { DataTable } from "@/components/table/DataTable";
 import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
 
 const AdminPage = async () => {
@@ -34,7 +34,7 @@ const AdminPage = async () => {
         </section>
 
         <section className="admin-stat">
-          {/* <StatCard
+          <StatCard
             type="appointments"
             count={appointments.scheduledCount}
             label="Scheduled appointments"
@@ -51,10 +51,10 @@ const AdminPage = async () => {
             count={appointments.cancelledCount}
             label="Cancelled appointments"
             icon={"/assets/icons/cancelled.svg"}
-          /> */}
+          />
         </section>
 
-        {/* <DataTable columns={columns} data={appointments.documents} /> */}
+        <DataTable columns={columns} data={appointments.documents} />
       </main>
     </div>
   );
