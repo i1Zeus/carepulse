@@ -37,8 +37,11 @@ export const getUser = async (userId: string) => {
     const user = await users.get(userId);
 
     return parseStringify(user);
-  } catch (err: any) {
-    console.log(err);
+  } catch (error) {
+    console.error(
+      "An error occurred while retrieving the user details:",
+      error
+    );
   }
 };
 
@@ -47,12 +50,15 @@ export const getPatient = async (userId: string) => {
     const patients = await databases.listDocuments(
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
-      [Query.equal("userId", userId)]
+      [Query.equal("userId", [userId])]
     );
 
     return parseStringify(patients.documents[0]);
-  } catch (err: any) {
-    console.log(err);
+  } catch (error) {
+    console.error(
+      "An error occurred while retrieving the patient details:",
+      error
+    );
   }
 };
 
