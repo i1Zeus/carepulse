@@ -7,7 +7,6 @@ import * as Sentry from "@sentry/nextjs";
 
 const Appointment = async ({ params: { userId } }: SearchParamProps) => {
   const patient = await getPatient(userId);
-
   Sentry.metrics.set("user_view_new-appointment", patient.name);
 
   return (
