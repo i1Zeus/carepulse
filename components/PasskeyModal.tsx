@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/input-otp";
 import { decryptKey, encryptKey } from "@/lib/utils";
 
+// const HALF_DAY_IN_MS = 12 * 60 * 60 * 1000;
+
 export const PasskeyModal = () => {
   const router = useRouter();
   const path = usePathname();
@@ -31,9 +33,21 @@ export const PasskeyModal = () => {
     typeof window !== "undefined"
       ? window.localStorage.getItem("accessKey")
       : null;
+  // const timestamp =
+  //   typeof window !== "undefined"
+  //     ? window.localStorage.getItem("accessKeyTimestamp")
+  //     : null;
 
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
+    // const currentTime = Date.now();
+    // const keyTimestamp = timestamp ? parseInt(timestamp, 10) : 0;
+
+    // if (currentTime - keyTimestamp > HALF_DAY_IN_MS) {
+    //   window.localStorage.removeItem("accessKey");
+    //   window.localStorage.removeItem("accessKeyTimestamp");
+    // }
+
     if (path) {
       if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
         setOpen(false);
@@ -55,8 +69,10 @@ export const PasskeyModal = () => {
     e.preventDefault();
     if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
       const encryptedKey = encryptKey(passkey);
+      // const currentTime = Date.now();
 
       localStorage.setItem("accessKey", encryptedKey);
+      // localStorage.setItem("accessKeyTimestamp", currentTime.toString());
 
       setOpen(false);
     } else {
