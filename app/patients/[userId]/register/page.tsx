@@ -12,9 +12,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
   Sentry.metrics.set("user_view_register", user.name);
 
-  if (patient && userId) {
-    redirect(`/patients/${userId}/new-appointment`);
-  }
+  if (patient) redirect(`/patients/${userId}/new-appointment`);
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -30,7 +28,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <p className="copyright py-12"> 2024 CarePluse</p>
+          <p className="copyright py-12">© 2024 CarePluse</p>
         </div>
       </section>
 
