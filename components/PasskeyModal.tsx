@@ -20,12 +20,10 @@ import {
 } from "@/components/ui/input-otp";
 import { decryptKey, encryptKey } from "@/lib/utils";
 
-// const HALF_DAY_IN_MS = 12 * 60 * 60 * 1000;
-
 export const PasskeyModal = () => {
   const router = useRouter();
   const path = usePathname();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [passkey, setPasskey] = useState("");
   const [error, setError] = useState("");
 
@@ -33,32 +31,20 @@ export const PasskeyModal = () => {
     typeof window !== "undefined"
       ? window.localStorage.getItem("accessKey")
       : null;
-  // const timestamp =
-  //   typeof window !== "undefined"
-  //     ? window.localStorage.getItem("accessKeyTimestamp")
-  //     : null;
 
   useEffect(() => {
     const accessKey = encryptedKey && decryptKey(encryptedKey);
-    // const currentTime = Date.now();
-    // const keyTimestamp = timestamp ? parseInt(timestamp, 10) : 0;
 
-    // if (currentTime - keyTimestamp > HALF_DAY_IN_MS) {
-    //   window.localStorage.removeItem("accessKey");
-    //   window.localStorage.removeItem("accessKeyTimestamp");
-    // }
-
-    if (path) {
-      if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
+    if (path)
+      if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
         setOpen(false);
         router.push("/admin");
       } else {
         setOpen(true);
       }
-    }
   }, [encryptedKey]);
 
-  const closeModel = () => {
+  const closeModal = () => {
     setOpen(false);
     router.push("/");
   };
@@ -67,6 +53,7 @@ export const PasskeyModal = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+
     if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
       const encryptedKey = encryptKey(passkey);
       // const currentTime = Date.now();
@@ -76,7 +63,7 @@ export const PasskeyModal = () => {
 
       setOpen(false);
     } else {
-      setError("Invalid passkey, please try again.");
+      setError("Invalid passkey. Please try again.");
     }
   };
 
@@ -89,9 +76,9 @@ export const PasskeyModal = () => {
             <Image
               src="/assets/icons/close.svg"
               alt="close"
-              height={20}
               width={20}
-              onClick={() => closeModel()}
+              height={20}
+              onClick={() => closeModal()}
               className="cursor-pointer"
             />
           </AlertDialogTitle>
@@ -100,8 +87,7 @@ export const PasskeyModal = () => {
             <span className="text-green-500">Passkey</span>.
           </AlertDialogDescription>
         </AlertDialogHeader>
-
-        <div className="">
+        <div>
           <InputOTP
             maxLength={6}
             value={passkey}
@@ -118,7 +104,7 @@ export const PasskeyModal = () => {
           </InputOTP>
 
           {error && (
-            <p className="shad-error text-14-regular mt-4 flex justify-center">
+            <p className="shad-error text-14-regular flex justify-center mt-4">
               {error}
             </p>
           )}
