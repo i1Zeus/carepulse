@@ -95,11 +95,17 @@ export const getPatient = async (userId: string) => {
       [Query.equal("userId", [userId])]
     );
 
-    return parseStringify(patients.documents[0]);
+    if (patients.documents.length > 0) {
+      return parseStringify(patients.documents[0]);
+    } else {
+      console.log("No patient found for the given userId");
+      return null;
+    }
   } catch (error) {
-    console.error(
+    console.log(
       "An error occurred while retrieving the patient details:",
       error
     );
+    return null;
   }
 };
