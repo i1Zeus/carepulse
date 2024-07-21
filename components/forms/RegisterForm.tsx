@@ -147,7 +147,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         <RadioGroupItem value={option} id={option} />
                         <Label
                           htmlFor={option}
-                          className="cursor-pointer capitalize"
+                          className="capitalize cursor-pointer"
                         >
                           {option}
                         </Label>
