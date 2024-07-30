@@ -56,10 +56,11 @@ export const PasskeyModal = () => {
 
     if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
       const encryptedKey = encryptKey(passkey);
-      // const currentTime = Date.now();
+      const currentTime = Date.now();
 
+      localStorage.setItem("isAdmin", "true");
       localStorage.setItem("accessKey", encryptedKey);
-      // localStorage.setItem("accessKeyTimestamp", currentTime.toString());
+      localStorage.setItem("accessKeyTimestamp", currentTime.toString());
 
       setOpen(false);
     } else {
