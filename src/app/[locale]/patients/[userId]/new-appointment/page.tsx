@@ -1,12 +1,14 @@
 import Image from "next/image";
 
-import { AppointmentForm } from "@/src/components/forms/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.actions";
+import { AppointmentForm } from "@/src/components/forms/AppointmentForm";
 
-import * as Sentry from "@sentry/nextjs";
 import { QrCodeModal } from "@/src/components/QrCodeModal";
+import * as Sentry from "@sentry/nextjs";
+import { getTranslations } from "next-intl/server";
 
 const Appointment = async ({ params: { userId } }: SearchParamProps) => {
+  const t = await getTranslations("Appointment");
   const patient = await getPatient(userId);
 
   if (patient) Sentry.metrics.set("user_view_new-appointment", patient.name);
@@ -33,7 +35,7 @@ const Appointment = async ({ params: { userId } }: SearchParamProps) => {
             type="create"
           />
 
-          <p className="copyright py-12 mt-10">© 2024 CarePluse</p>
+          <p className="copyright py-12 mt-10">{t("copyRight")}</p>
         </div>
       </section>
 
