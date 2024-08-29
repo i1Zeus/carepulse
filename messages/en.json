@@ -1,6 +1,5 @@
 {
   "HomePage": {
-    "copyRight": "© 2024 CarePulse",
     "admin": "Admin"
   },
   "PatientForm": {
@@ -23,7 +22,7 @@
     "btnOne": "Go Home",
     "or": "or",
     "btnTwo": "Go Back",
-    "copyRight": "© 2024 CarePulse",
+
     "Admin": "Admin"
   },
   "Forbidden": {
@@ -32,7 +31,7 @@
     "p": "Forbidden - Access Denied",
     "p2": "You don't have permission to access this page.",
     "btnOne": "Go Home",
-    "copyRight": "© 2024 CarePulse",
+
     "Admin": "Admin"
   },
   "AdminPage": {
@@ -53,5 +52,101 @@
     "scheduleDescription": "Please confirm the following details to schedule.",
     "cancelTitle": "Cancel Appointment",
     "cancelDescription": "Are you sure you want to cancel your appointment?"
+  },
+  "Register": {
+    "welcome": "Welcome {name}👋🏼",
+    "subTitle": "Let us know more about yourself.",
+    "personal": "Personal Information",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "genderOpt": {
+      "male": "male",
+      "female": "female",
+      "other": "other"
+    },
+    "address": "Address",
+    "addPlaceholder": "Al Qibla, Basra, Iraq 61003",
+    "occupation": "Occupation",
+    "occupationPlaceholder": "Web Developer",
+    "emergencyContactName": "Emergency Contact Name",
+    "emergencyContactNamePlaceholder": "Mohammed Ali",
+    "emergencyContactNumber": "Emergency Contact Number",
+    "emergencyContactNumberPlaceholder": "123 456 7890",
+    "medicalInfo": "Medical Information",
+    "primaryPhysician": "Primary Care Physician",
+    "primaryPhysicianPlaceholder": "Select a physician",
+    "insuranceProvider": "Insurance Provider",
+    "insuranceProviderPlaceholder": "BlueCross BlueShield",
+    "insurancePolicyNumber": "Insurance Policy Number",
+    "insurancePolicyNumberPlaceholder": "ABC123456789",
+    "allergies": "Allergies (if any)",
+    "allergiesPlaceholder": "Peanuts, Penicillin, Pollen",
+    "currentMedications": "Current Medications",
+    "currentMedicationsPlaceholder": "Ibuprofen 200mg, Levothyroxine 50mcg",
+    "familyMedicalHistory": "Family Medical History (if relevant)",
+    "familyMedicalHistoryPlaceholder": "Mother had brain cancer, Father has hypertension",
+    "pastMedicalHistory": "Past Medical History",
+    "pastMedicalHistoryPlaceholder": "Appendectomy in 2015, Asthma diagnosis in childhood",
+    "identificationVerification": "Identification and Verification",
+    "identificationType": "Identification Type",
+    "identificationTypePlaceholder": "Select identification type",
+    "identificationNumber": "Identification Number",
+    "scannedIdentificationDocument": "Scanned Copy of Identification Document",
+    "IdentificationTypes": {
+      "birthCertificate": "Birth Certificate",
+      "driverLicense": "Driver's License",
+      "medicalInsurance": "Medical Insurance Card/Policy",
+      "militaryID": "Military ID Card",
+      "nationalIdentity": "National Identity Card",
+      "passport": "Passport",
+      "socialSecurity": "Social Security Card",
+      "studentId": "Student ID Card",
+      "voterId": "Voter ID Card"
+    },
+    "consentAndPrivacy": "Consent and Privacy",
+    "treatmentConsent": "I consent to receive treatment for my health condition.",
+    "disclosureConsent": "I consent to the use and disclosure of my health information for treatment purposes.",
+    "privacyConsent": "I acknowledge that I have reviewed and agree to the privacy policy",
+    "submit": "Submit"
+  },
+  "Appointment": {
+    "AppointmentModal": "Appointment",
+    "qrModal": {
+      "title": "Smart Link",
+      "subTitle": "Scan QR code to visit patient's apportionment page."
+    },
+    "header": "New Appointment",
+    "usbTitle": "Request a new appointment in few seconds.",
+    "doctor": {
+      "label": "Doctor",
+      "placeholder": "Select a doctor"
+    },
+    "schedule": "Expected appointment date",
+    "reason": {
+      "label": "Appointment reason",
+      "placeholder": "Annual monthly check-up"
+    },
+    "note": {
+      "label": "Comments/notes",
+      "placeholder": "Prefer afternoon appointments, if possible"
+    },
+    "cancellationReason": {
+      "label": "Reason for cancellation",
+      "placeholder": "Urgent meeting came up"
+    },
+    "buttonLabel": {
+      "schedule": "Schedule Appointment",
+      "cancel": "Cancel Appointment",
+      "submit": "Submit Appointment"
+    }
+  },
+  "Success": {
+    "header": "Your <span>appointment request</span> has been successfully submitted!",
+    "subTitle": "We'll be in touch shortly to confirm.",
+    "details": "Requested appointment details:",
+    "bookAppointment": "New Appointment"
   }
 }
