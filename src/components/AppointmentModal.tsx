@@ -16,6 +16,7 @@ import { Appointment } from "@/types/appwrite.types";
 import { AppointmentForm } from "./forms/AppointmentForm";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { useTranslations } from "next-intl";
 
 export const AppointmentModal = ({
   patientId,
@@ -31,6 +32,7 @@ export const AppointmentModal = ({
   title: string;
   description?: string;
 }) => {
+  const t = useTranslations("Appointment");
   const [open, setOpen] = useState(false);
 
   return (
@@ -45,7 +47,9 @@ export const AppointmentModal = ({
       </DialogTrigger>
       <DialogContent className="shad-dialog sm:max-w-md">
         <DialogHeader className="mb-4 space-y-3">
-          <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
+          <DialogTitle className="capitalize">
+            {t("AppointmentModal", { type: type })}
+          </DialogTitle>
           <DialogDescription>
             {description
               ? description
