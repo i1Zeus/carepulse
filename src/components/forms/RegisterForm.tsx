@@ -84,7 +84,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         className="flex-1 space-y-12"
       >
         <section className="mb-12 space-y-4">
-          <h1 className="header">{t("welcome") + " " + usedName}</h1>
+          <h1 className="header">{t("welcome", { name: usedName })}</h1>
           <p className="text-dark-700">{t("subTitle")}</p>
         </section>
 

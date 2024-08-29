@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import QRCode from "qrcode";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import QRCode from "qrcode";
 
+import { useHref } from "@/hooks/use-href";
 import { Button } from "@/src/components/ui/button";
 import {
   Dialog,
@@ -14,9 +15,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/src/components/ui/dialog";
-import { useHref } from "@/hooks/use-href";
+import { useTranslations } from "next-intl";
 
 export const QrCodeModal = () => {
+  const t = useTranslations("Appointment");
   const [open, setOpen] = useState(false);
   const [src, setSrc] = useState<string>("");
   const href = useHref();
@@ -39,11 +41,8 @@ export const QrCodeModal = () => {
       </DialogTrigger>
       <DialogContent className="shad-dialog sm:max-w-md">
         <DialogHeader className="mb-4 space-y-3">
-          <DialogTitle className="capitalize">smart link</DialogTitle>
-          <DialogDescription>
-            Scan <span className="font-bold text-green-500">QR</span> code to
-            visit patient's apportionment page.
-          </DialogDescription>
+          <DialogTitle className="capitalize">{t("qrModal.title")}</DialogTitle>
+          <DialogDescription>{t("qrModal.subTitle")}</DialogDescription>
         </DialogHeader>
         <div className="flex-1 space-y-6">
           <Image
