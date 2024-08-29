@@ -11,5 +11,47 @@
     "phoneNumber": "Phone Number",
     "phoneNumberPlace": "123 456 7890",
     "submit": "Get Started"
+  },
+  "Loading": {
+    "loading": "Loading..."
+  },
+  "NotFound": {
+    "title": "404 - Not Found",
+    "h1": "404",
+    "p": "Page Not Found",
+    "p2": "The page you are looking for does not exist or has been moved.",
+    "btnOne": "Go Home",
+    "or": "or",
+    "btnTwo": "Go Back",
+    "copyRight": "© 2024 CarePulse",
+    "Admin": "Admin"
+  },
+  "Forbidden": {
+    "title": "403 - Forbidden",
+    "h1": "403",
+    "p": "Forbidden - Access Denied",
+    "p2": "You don't have permission to access this page.",
+    "btnOne": "Go Home",
+    "copyRight": "© 2024 CarePulse",
+    "Admin": "Admin"
+  },
+  "AdminPage": {
+    "dash": "Admin Dashboard",
+    "hi": "Welcome 👋",
+    "start": "Start the day with managing new appointments.",
+    "labelOne": "Scheduled appointments",
+    "labelTwo": "Pending appointments",
+    "labelThree": "Cancelled appointments"
+  },
+  "Columns": {
+    "patient": "Patient",
+    "status": "Status",
+    "appointment": "Appointment",
+    "doctor": "Doctor",
+    "actions": "Actions",
+    "scheduleTitle": "Schedule Appointment",
+    "scheduleDescription": "Please confirm the following details to schedule.",
+    "cancelTitle": "Cancel Appointment",
+    "cancelDescription": "Are you sure you want to cancel your appointment?"
   }
 }
