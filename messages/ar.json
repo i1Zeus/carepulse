@@ -2,6 +2,10 @@
   "HomePage": {
     "admin": "المسؤول"
   },
+  "LocaleSwitcher": {
+    "label": "غير اللغة",
+    "locale": "{locale, select, ar {ar} en {🇺🇸} other {Unknown}}"
+  },
   "PatientForm": {
     "welcome": "مرحبا 👋🏼",
     "subTitle": "ابدأ بإعداد المواعيد.",

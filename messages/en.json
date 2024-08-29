@@ -2,6 +2,10 @@
   "HomePage": {
     "admin": "Admin"
   },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ar {ar} en {🇺🇸} other {Unknown}}"
+  },
   "PatientForm": {
     "welcome": "Hi there 👋",
     "subTitle": "Get started with appointments.",
