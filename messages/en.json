@@ -1,0 +1,15 @@
+{
+  "HomePage": {
+    "copyRight": "© 2024 CarePulse",
+    "admin": "Admin"
+  },
+  "PatientForm": {
+    "welcome": "Hi there 👋",
+    "subTitle": "Get started with appointments.",
+    "name": "Full Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlace": "123 456 7890",
+    "submit": "Get Started"
+  }
+}
