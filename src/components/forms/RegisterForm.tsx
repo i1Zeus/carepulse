@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Form, FormControl } from "@/src/components/ui/form";
 import {
   Doctors,
   GenderOptions,
@@ -13,6 +12,8 @@ import {
 } from "@/constants";
 import { registerPatient } from "@/lib/actions/patient.actions";
 import { PatientFormValidation } from "@/lib/validation";
+import { Form, FormControl } from "@/src/components/ui/form";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,6 +25,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { SelectItem } from "../ui/select";
 
 const RegisterForm = ({ user }: { user: User }) => {
+  const t = useTranslations("Register");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,14 +84,14 @@ const RegisterForm = ({ user }: { user: User }) => {
         className="flex-1 space-y-12"
       >
         <section className="mb-12 space-y-4">
-          <h1 className="header">Welcome {usedName} 👋🏼</h1>
-          <p className="text-dark-700">Let us know more about yourself.</p>
+          <h1 className="header">{t("welcome") + " " + usedName}</h1>
+          <p className="text-dark-700">{t("subTitle")}</p>
         </section>
 
         {/* Personal Information */}
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Personal Information</h2>
+            <h2 className="sub-header">{t("personal")}</h2>
           </div>
           {/* NAME */}
           <CustomFormField
@@ -97,7 +99,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             control={form.control}
             name="name"
             placeholder={user.name}
-            label="Full Name"
+            label={t("fullName")}
             iconSrc="/assets/icons/user.svg"
             iconAlt="user"
           />
@@ -107,7 +109,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="email"
-              label="Email"
+              label={t("email")}
               placeholder={user.email}
               iconSrc="/assets/icons/email.svg"
               iconAlt="email"
@@ -117,7 +119,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="phone"
-              label="Phone number"
+              label={t("phoneNumber")}
               placeholder={user.phone}
             />
           </div>
@@ -127,14 +129,14 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="birthDate"
-              label="Date of birth"
+              label={t("dateOfBirth")}
             />
 
             <CustomFormField
               fieldType={FormFieldType.SKELETON}
               control={form.control}
               name="gender"
-              label="Gender"
+              label={t("gender")}
               renderSkeleton={(field) => (
                 <FormControl>
                   <RadioGroup
@@ -142,14 +144,16 @@ const RegisterForm = ({ user }: { user: User }) => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    {GenderOptions.map((option, i) => (
+                    {GenderOptions.map((option: string, i) => (
                       <div key={option + i} className="radio-group">
                         <RadioGroupItem value={option} id={option} />
                         <Label
                           htmlFor={option}
                           className="capitalize cursor-pointer"
                         >
-                          {option}
+                          {option === "male" ? t("genderOpt.male") : ""}
+                          {option === "female" ? t("genderOpt.female") : ""}
+                          {option === "other" ? t("genderOpt.other") : ""}
                         </Label>
                       </div>
                     ))}
@@ -164,16 +168,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="address"
-              label="Address"
-              placeholder="Al Qibla, Basra, Iraq 61003"
+              label={t("address")}
+              placeholder={t("addPlaceholder")}
             />
 
             <CustomFormField
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="occupation"
-              label="Occupation"
-              placeholder="Web Developer"
+              label={t("occupation")}
+              placeholder={t("occupationPlaceholder")}
             />
           </div>
           {/* Emergency Contact Name & Emergency Contact Number */}
@@ -182,16 +186,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="emergencyContactName"
-              label="Emergency contact name"
-              placeholder="Guardian's name"
+              label={t("emergencyContactName")}
+              placeholder={t("emergencyContactNamePlaceholder")}
             />
 
             <CustomFormField
               fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
               name="emergencyContactNumber"
-              label="Emergency contact number"
-              placeholder="(555) 123-4567"
+              label={t("emergencyContactNumber")}
+              placeholder={t("emergencyContactNumberPlaceholder")}
             />
           </div>{" "}
         </section>
@@ -199,7 +203,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         {/* Medical Information */}
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Medical Information</h2>
+            <h2 className="sub-header">{t("medicalInfo")}</h2>
           </div>
 
           {/* PRIMARY CARE PHYSICIAN */}
@@ -207,8 +211,8 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.SELECT}
             control={form.control}
             name="primaryPhysician"
-            label="Primary care physician"
-            placeholder="Select a physician"
+            label={t("primaryPhysician")}
+            placeholder={t("primaryPhysicianPlaceholder")}
           >
             {Doctors.map((doctor, i) => (
               <SelectItem key={doctor.name + i} value={doctor.name}>
@@ -232,16 +236,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="insuranceProvider"
-              label="Insurance provider"
-              placeholder="BlueCross BlueShield"
+              label={t("insuranceProvider")}
+              placeholder={t("insuranceProviderPlaceholder")}
             />
 
             <CustomFormField
               fieldType={FormFieldType.INPUT}
               control={form.control}
               name="insurancePolicyNumber"
-              label="Insurance policy number"
-              placeholder="ABC123456789"
+              label={t("insurancePolicyNumber")}
+              placeholder={t("insurancePolicyNumberPlaceholder")}
             />
           </div>
 
@@ -251,16 +255,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="allergies"
-              label="Allergies (if any)"
-              placeholder="Peanuts, Penicillin, Pollen"
+              label={t("allergies")}
+              placeholder={t("allergiesPlaceholder")}
             />
 
             <CustomFormField
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="currentMedication"
-              label="Current medications"
-              placeholder="Ibuprofen 200mg, Levothyroxine 50mcg"
+              label={t("currentMedications")}
+              placeholder={t("currentMedicationsPlaceholder")}
             />
           </div>
 
@@ -270,16 +274,16 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="familyMedicalHistory"
-              label=" Family medical history (if relevant)"
-              placeholder="Mother had brain cancer, Father has hypertension"
+              label={t("familyMedicalHistory")}
+              placeholder={t("familyMedicalHistoryPlaceholder")}
             />
 
             <CustomFormField
               fieldType={FormFieldType.TEXTAREA}
               control={form.control}
               name="pastMedicalHistory"
-              label="Past medical history"
-              placeholder="Appendectomy in 2015, Asthma diagnosis in childhood"
+              label={t("pastMedicalHistory")}
+              placeholder={t("pastMedicalHistoryPlaceholder")}
             />
           </div>
         </section>
@@ -287,19 +291,43 @@ const RegisterForm = ({ user }: { user: User }) => {
         {/* Identification and Verification */}
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Identification and Verification</h2>
+            <h2 className="sub-header">{t("identificationVerification")}</h2>
           </div>
 
           <CustomFormField
             fieldType={FormFieldType.SELECT}
             control={form.control}
             name="identificationType"
-            label="Identification Type"
-            placeholder="Select identification type"
+            label={t("identificationType")}
+            placeholder={t("identificationTypePlaceholder")}
           >
             {IdentificationTypes.map((type, i) => (
               <SelectItem key={type + i} value={type}>
-                {type}
+                {type === "Birth Certificate"
+                  ? t("IdentificationTypes.birthCertificate")
+                  : ""}
+                {type === "Driver's License"
+                  ? t("IdentificationTypes.driverLicense")
+                  : ""}
+                {type === "Medical Insurance Card/Policy"
+                  ? t("IdentificationTypes.medicalInsurance")
+                  : ""}
+                {type === "Military ID Card"
+                  ? t("IdentificationTypes.militaryID")
+                  : ""}
+                {type === "National Identity Card"
+                  ? t("IdentificationTypes.nationalIdentity")
+                  : ""}
+                {type === "Passport" ? t("IdentificationTypes.passport") : ""}
+                {type === "Social Security Card"
+                  ? t("IdentificationTypes.socialSecurity")
+                  : ""}
+                {type === "Student ID Card"
+                  ? t("IdentificationTypes.studentId")
+                  : ""}
+                {type === "Voter ID Card"
+                  ? t("IdentificationTypes.voterId")
+                  : ""}
               </SelectItem>
             ))}
           </CustomFormField>
@@ -308,7 +336,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.INPUT}
             control={form.control}
             name="identificationNumber"
-            label="Identification Number"
+            label={t("identificationNumber")}
             placeholder="A123456789"
           />
 
@@ -316,7 +344,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.SKELETON}
             control={form.control}
             name="identificationDocument"
-            label="Scanned Copy of Identification Document"
+            label={t("scannedIdentificationDocument")}
             renderSkeleton={(field) => (
               <FormControl>
                 <FileUploader files={field.value} onChange={field.onChange} />
@@ -328,34 +356,32 @@ const RegisterForm = ({ user }: { user: User }) => {
         {/* Consent and Privacy */}
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-            <h2 className="sub-header">Consent and Privacy</h2>
+            <h2 className="sub-header">{t("consentAndPrivacy")}</h2>
           </div>
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="treatmentConsent"
-            label="I consent to receive treatment for my health condition."
+            label={t("treatmentConsent")}
           />
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="disclosureConsent"
-            label="I consent to the use and disclosure of my health
-            information for treatment purposes."
+            label={t("disclosureConsent")}
           />
 
           <CustomFormField
             fieldType={FormFieldType.CHECKBOX}
             control={form.control}
             name="privacyConsent"
-            label="I acknowledge that I have reviewed and agree to the
-            privacy policy"
+            label={t("privacyConsent")}
           />
         </section>
 
-        <SubmitButton isLoading={isLoading}>Submit</SubmitButton>
+        <SubmitButton isLoading={isLoading}>{t("submit")}</SubmitButton>
       </form>
     </Form>
   );
