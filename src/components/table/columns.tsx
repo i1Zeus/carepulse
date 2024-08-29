@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
+import { useTranslations } from "next-intl"; // Import useTranslations
 
 import { Doctors } from "@/constants";
 import { formatDateTime } from "@/lib/utils";
@@ -19,7 +20,10 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "patient",
-    header: "Patient",
+    header: () => {
+      const t = useTranslations("Columns"); // Initialize useTranslations for Columns
+      return t("patient"); // Translate the "Patient" column header
+    },
     cell: ({ row }) => {
       const appointment = row.original;
       return <p className="text-14-medium ">{appointment.patient.name}</p>;
@@ -27,7 +31,10 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => {
+      const t = useTranslations("Columns");
+      return t("status"); // Translate the "Status" column header
+    },
     cell: ({ row }) => {
       const appointment = row.original;
       return (
@@ -39,7 +46,10 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "schedule",
-    header: "Appointment",
+    header: () => {
+      const t = useTranslations("Columns");
+      return t("appointment");
+    },
     cell: ({ row }) => {
       const appointment = row.original;
       return (
@@ -51,7 +61,10 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "primaryPhysician",
-    header: "Doctor",
+    header: () => {
+      const t = useTranslations("Columns");
+      return t("doctor");
+    },
     cell: ({ row }) => {
       const appointment = row.original;
 
@@ -75,10 +88,13 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     id: "actions",
-    header: () => <div className="pl-4">Actions</div>,
+    header: () => {
+      const t = useTranslations("Columns");
+      return <div className="pl-4">{t("actions")}</div>;
+    },
     cell: ({ row }) => {
       const appointment = row.original;
-
+      const t = useTranslations("Columns");
       return (
         <div className="flex gap-1">
           <AppointmentModal
@@ -86,16 +102,16 @@ export const columns: ColumnDef<Appointment>[] = [
             userId={appointment.userId}
             appointment={appointment}
             type="schedule"
-            title="Schedule Appointment"
-            description="Please confirm the following details to schedule."
+            title={t("scheduleTitle")}
+            description={t("scheduleDescription")}
           />
           <AppointmentModal
             patientId={appointment.patient.$id}
             userId={appointment.userId}
             appointment={appointment}
             type="cancel"
-            title="Cancel Appointment"
-            description="Are you sure you want to cancel your appointment?"
+            title={t("cancelTitle")}
+            description={t("cancelDescription")}
           />
         </div>
       );

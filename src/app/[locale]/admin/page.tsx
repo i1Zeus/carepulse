@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
 import { StatCard } from "@/src/components/StatCard";
 import { columns } from "@/src/components/table/columns";
 import { DataTable } from "@/src/components/table/DataTable";
-import { getRecentAppointmentList } from "@/lib/actions/appointment.actions";
+import { getTranslations } from "next-intl/server";
 
 const AdminPage = async () => {
   const appointments = await getRecentAppointmentList();
+  const t = await getTranslations("AdminPage");
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -22,34 +24,32 @@ const AdminPage = async () => {
           />
         </Link>
 
-        <p className="text-16-semibold">Admin Dashboard</p>
+        <p className="text-16-semibold">{t("dash")}</p>
       </header>
 
       <main className="admin-main">
         <section className="w-full space-y-4">
-          <h1 className="header">Welcome 👋</h1>
-          <p className="text-dark-700">
-            Start the day with managing new appointments
-          </p>
+          <h1 className="header">{t("hi")}</h1>
+          <p className="text-dark-700">{t("start")}</p>
         </section>
 
         <section className="admin-stat">
           <StatCard
             type="appointments"
             count={appointments.scheduledCount}
-            label="Scheduled appointments"
+            label={t("labelOne")}
             icon={"/assets/icons/appointments.svg"}
           />
           <StatCard
             type="pending"
             count={appointments.pendingCount}
-            label="Pending appointments"
+            label={t("labelTwo")}
             icon={"/assets/icons/pending.svg"}
           />
           <StatCard
             type="cancelled"
             count={appointments.cancelledCount}
-            label="Cancelled appointments"
+            label={t("labelThree")}
             icon={"/assets/icons/cancelled.svg"}
           />
         </section>

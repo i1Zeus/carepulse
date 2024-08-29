@@ -22,13 +22,14 @@ export const AppointmentModal = ({
   userId,
   appointment,
   type,
+  description,
 }: {
   patientId: string;
   userId: string;
   appointment?: Appointment;
   type: "schedule" | "cancel";
   title: string;
-  description: string;
+  description?: string;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -46,7 +47,9 @@ export const AppointmentModal = ({
         <DialogHeader className="mb-4 space-y-3">
           <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
           <DialogDescription>
-            Please fill in the following details to {type} appointment
+            {description
+              ? description
+              : `Please fill in the following details to ${type} appointment`}
           </DialogDescription>
         </DialogHeader>
 

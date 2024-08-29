@@ -1,12 +1,14 @@
 "use client";
 
 import { Button } from "@/src/components/ui/button";
+import { useTranslations } from "next-intl";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Custom404 = () => {
+  const t = useTranslations("NotFound");
   const router = useRouter();
 
   const handleGoBack = () => {
@@ -16,7 +18,7 @@ const Custom404 = () => {
   return (
     <>
       <Head>
-        <title>404 - Not Found</title>
+        <title>{t("title")}</title>
         <meta name="description" content="404 Page Not Found" />
       </Head>
       <div className="flex items-center justify-center h-screen max-h-screen overflow-hidden">
@@ -33,40 +35,40 @@ const Custom404 = () => {
             </Link>
             <div className="relative p-5">
               <h1 className="text-[100px] md:text-[200px] opacity-10 font-bold text-center animate-pulse text-dark-600">
-                404
+                {t("h1")}
               </h1>
 
               <p className="opacity-60 text-[30px] md:text-7xl top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] absolute font-bold truncate h-[45px] md:h-[90px]">
-                Page Not Found
+                {t("p")}
               </p>
-              <p className="opacity-35 text-sm text-center">
-                The page you are looking for does not exist or has been moved.
-              </p>
+              <p className="opacity-35 text-sm text-center">{t("p")}</p>
             </div>
 
             <div className="md:flex-row sm:pt-0 flex flex-col items-center justify-center gap-3 pt-5">
               <Link href="/" className="sm:w-fit w-full">
                 <Button size={"lg"} className="sm:w-fit w-full">
-                  Go Home
+                  {t("btnOne")}
                 </Button>
               </Link>
-              <p className="text-sm font-bold text-center opacity-50">OR</p>
+              <p className="text-sm font-bold text-center opacity-50">
+                {t("or")}
+              </p>
               <Button
                 size={"lg"}
                 variant={"secondary"}
                 onClick={handleGoBack}
                 className="sm:w-fit w-full"
               >
-                Go Back
+                {t("btnTwo")}
               </Button>
             </div>
 
             <div className="text-14-regular flex justify-between mt-20">
               <p className="justify-items-end text-dark-600 xl:text-left">
-                © 2024 CarePluse
+                {t("copyRight")}
               </p>
               <Link href="/?admin=true" className="text-green-500">
-                Admin
+                {t("Admin")}
               </Link>
             </div>
           </div>
