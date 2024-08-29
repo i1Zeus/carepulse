@@ -5,8 +5,10 @@ import RegisterForm from "@/src/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
 
 import * as Sentry from "@sentry/nextjs";
+import { getTranslations } from "next-intl/server";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
+  const t = await getTranslations("Register");
   const user = await getUser(userId);
   const patient = await getPatient(userId);
 
@@ -28,7 +30,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <p className="copyright py-12">© 2024 CarePluse</p>
+          <p className="copyright py-12">{t("copyRight")}</p>
         </div>
       </section>
 
