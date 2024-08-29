@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/src/components/ui/button";
 import { Doctors } from "@/constants";
 import { getAppointment } from "@/lib/actions/appointment.actions";
 import { getUser } from "@/lib/actions/patient.actions";
 import { formatDateTime } from "@/lib/utils";
+import { Button } from "@/src/components/ui/button";
+import { getTranslations } from "next-intl/server";
 
 import * as Sentry from "@sentry/nextjs";
 
@@ -13,6 +14,7 @@ const RequestSuccess = async ({
   searchParams,
   params: { userId },
 }: SearchParamProps) => {
+  const t = await getTranslations("Success");
   const appointmentId = (searchParams?.appointmentId as string) || "";
   const appointment = await getAppointment(appointmentId);
   const user = await getUser(userId);
@@ -45,14 +47,17 @@ const RequestSuccess = async ({
             alt="success"
           />
           <h2 className="header mb-6 max-w-[600px] text-center">
-            Your <span className="text-green-500">appointment request</span> has
-            been successfully submitted!
+            {t.rich("header", {
+              span: (chunks) => (
+                <span className="text-green-500">{chunks}</span>
+              ),
+            })}
           </h2>
-          <p>We&apos;ll be in touch shortly to confirm.</p>
+          <p>{t("subTitle")}</p>
         </section>
 
         <section className="request-details">
-          <p>Requested appointment details: </p>
+          <p>{t("details")} </p>
           <div className="flex items-center gap-3">
             <Image
               src={doctor?.image!}
@@ -76,7 +81,7 @@ const RequestSuccess = async ({
 
         <Button variant="outline" className="shad-primary-btn" asChild>
           <Link href={`/patients/${userId}/new-appointment`}>
-            New Appointment
+            {t("bookAppointment")}
           </Link>
         </Button>
 
