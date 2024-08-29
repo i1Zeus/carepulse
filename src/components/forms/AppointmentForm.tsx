@@ -21,6 +21,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { Form } from "../ui/form";
+import { useTranslations } from "next-intl";
 
 export const AppointmentForm = ({
   userId,
@@ -35,6 +36,7 @@ export const AppointmentForm = ({
   appointment?: Appointment;
   setOpen?: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const t = useTranslations("Appointment");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -119,13 +121,13 @@ export const AppointmentForm = ({
   let buttonLabel;
   switch (type) {
     case "cancel":
-      buttonLabel = "Cancel Appointment";
+      buttonLabel = t("buttonLabel.cancel");
       break;
     case "schedule":
-      buttonLabel = "Schedule Appointment";
+      buttonLabel = t("buttonLabel.schedule");
       break;
     default:
-      buttonLabel = "Submit Appointment";
+      buttonLabel = t("buttonLabel.submit");
   }
 
   return (
@@ -133,10 +135,8 @@ export const AppointmentForm = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-6">
         {type === "create" && (
           <section className="mb-12 space-y-4">
-            <h1 className="header">New Appointment</h1>
-            <p className="text-dark-700">
-              Request a new appointment in few seconds.
-            </p>
+            <h1 className="header">{t("header")}</h1>
+            <p className="text-dark-700">{t("usbTitle")}</p>
           </section>
         )}
 
@@ -146,8 +146,8 @@ export const AppointmentForm = ({
               fieldType={FormFieldType.SELECT}
               control={form.control}
               name="primaryPhysician"
-              label="Doctor"
-              placeholder="Select a doctor"
+              label={t("doctor.label")}
+              placeholder={t("doctor.placeholder")}
             >
               {Doctors.map((doctor, i) => (
                 <SelectItem key={doctor.name + i} value={doctor.name}>
@@ -156,7 +156,7 @@ export const AppointmentForm = ({
                       src={doctor.image}
                       width={32}
                       height={32}
-                      alt="doctor"
+                      alt={t("doctor.label")}
                       className="border-dark-500 border rounded-full"
                     />
                     <p>{doctor.name}</p>
@@ -169,7 +169,7 @@ export const AppointmentForm = ({
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="schedule"
-              label="Expected appointment date"
+              label={t("schedule")}
               showTimeSelect
               dateFormat="MM/dd/yyyy  -  h:mm aa"
             />
@@ -183,8 +183,8 @@ export const AppointmentForm = ({
                 fieldType={FormFieldType.TEXTAREA}
                 control={form.control}
                 name="reason"
-                label="Appointment reason"
-                placeholder="Annual monthly check-up"
+                label={t("reason.label")}
+                placeholder={t("reason.placeholder")}
                 disabled={type === "schedule"}
               />
 
@@ -192,8 +192,8 @@ export const AppointmentForm = ({
                 fieldType={FormFieldType.TEXTAREA}
                 control={form.control}
                 name="note"
-                label="Comments/notes"
-                placeholder="Prefer afternoon appointments, if possible"
+                label={t("note.label")}
+                placeholder={t("note.placeholder")}
                 disabled={type === "schedule"}
               />
             </div>
