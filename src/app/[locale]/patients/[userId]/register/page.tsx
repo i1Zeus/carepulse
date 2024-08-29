@@ -1,18 +1,15 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import RegisterForm from "@/src/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
+import RegisterForm from "@/src/components/forms/RegisterForm";
 
-import * as Sentry from "@sentry/nextjs";
 import { getTranslations } from "next-intl/server";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const t = await getTranslations("Register");
   const user = await getUser(userId);
   const patient = await getPatient(userId);
-
-  Sentry.metrics.set("user_view_register", user.name);
 
   if (patient) redirect(`/patients/${userId}/new-appointment`);
 

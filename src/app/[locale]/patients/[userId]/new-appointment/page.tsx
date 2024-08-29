@@ -4,14 +4,11 @@ import { getPatient } from "@/lib/actions/patient.actions";
 import { AppointmentForm } from "@/src/components/forms/AppointmentForm";
 
 import { QrCodeModal } from "@/src/components/QrCodeModal";
-import * as Sentry from "@sentry/nextjs";
 import { getTranslations } from "next-intl/server";
 
 const Appointment = async ({ params: { userId } }: SearchParamProps) => {
   const t = await getTranslations("Appointment");
   const patient = await getPatient(userId);
-
-  if (patient) Sentry.metrics.set("user_view_new-appointment", patient.name);
 
   return (
     <div className="flex h-screen max-h-screen">
