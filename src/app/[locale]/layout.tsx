@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
+import { getLangDir } from "rtl-detect";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
@@ -30,8 +31,9 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const messages = await getMessages();
+  const direction = getLangDir(locale);
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={direction}>
       <body
         className={cn(
           "min-h-screen bg-dark-300 font-sans antialiased",
