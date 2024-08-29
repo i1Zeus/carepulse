@@ -50,7 +50,7 @@ export default function Custom403() {
             </Link>
 
             <p className="justify-items-end text-dark-600 xl:text-left text-14-regular flex justify-between mt-20">
-              {t("copyRight")}
+              © 2024 CarePulse
             </p>
           </div>
         </section>
