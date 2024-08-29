@@ -1,9 +1,10 @@
-import { Link } from "@/src/routing";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 import { PatientForm } from "@/src/components/forms/PatientForm";
 import { PasskeyModal } from "@/src/components/PasskeyModal";
+import Link from "next/link";
+import LocaleSwitcher from "@/src/components/LocaleSwitcher";
 
 const Home = ({ searchParams }: SearchParamProps) => {
   const isAdmin = searchParams?.admin === "true";
@@ -13,6 +14,7 @@ const Home = ({ searchParams }: SearchParamProps) => {
     <div className="flex h-screen max-h-screen">
       {isAdmin && <PasskeyModal />}
       <section className="remove-scrollbar container my-auto">
+        <LocaleSwitcher />
         <div className="sub-container max-w-[496px]">
           <Image
             src="/assets/icons/logo-full.svg"
@@ -21,7 +23,6 @@ const Home = ({ searchParams }: SearchParamProps) => {
             alt="patient"
             className="w-fit h-10 mb-12"
           />
-
           <PatientForm />
 
           <div className="text-14-regular flex justify-between mt-20">
