@@ -7,6 +7,7 @@ import { getLangDir } from "rtl-detect";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
+import LocaleSwitcher from "@/src/components/LocaleSwitcher";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark">
+            <LocaleSwitcher />
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
