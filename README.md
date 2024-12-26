@@ -15,6 +15,10 @@
     </div>
 </div>
 
+## Open Preview of the markdown file.
+
+> Click `CTRL + SHIFT + V`
+
 ## 📋 <a name="table">Table of Contents</a>
 
 1. 🤖 [Introduction](#introduction)
@@ -27,9 +31,8 @@
 
 A healthcare patient management application that allows patients to easily register, book, and manage their appointments with doctors, featuring administrative tools for scheduling, confirming, and canceling appointments, along with SMS notifications, all built using Next.js.
 
-If you're getting started and need assistance or face any bugs, join our active Discord community with over **34k+** members. It's a place where people help each other out.
-
-<a href="https://discord.gg/jNA9YXHG" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/618f4872-1e10-42da-8213-1d69e486d02e" /></a>
+Join me on Discord <br/>
+<a href="https://discord.gg/5R4PGmxQTZ" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/618f4872-1e10-42da-8213-1d69e486d02e" /></a>
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
